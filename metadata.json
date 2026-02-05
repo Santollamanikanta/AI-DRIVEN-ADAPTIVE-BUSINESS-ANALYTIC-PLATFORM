@@ -1,0 +1,7 @@
+{
+  "name": "BizAnalytica AI",
+  "description": "An AI-powered analytics and CRM platform for small business owners. Upload sales data, analyze handwritten bills, generate business insights with dashboards and graphs, and engage customers with AI-driven CRM tools.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
