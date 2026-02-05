@@ -1,27 +1,28 @@
-
 import React from 'react';
 import type { NavItem } from '../types';
-import { ChartPieIcon, ArrowUpOnSquareIcon, LightBulbIcon, UsersIcon, SparklesIcon, ArrowLeftOnRectangleIcon } from './icons';
+import { BIcon, ChartPieIcon, ArrowUpOnSquareIcon, LightBulbIcon, UsersIcon, ArrowLeftOnRectangleIcon } from './icons';
 
 interface SidebarProps {
-  activeItem: NavItem;
-  setActiveItem: (item: NavItem) => void;
+  activeTab: NavItem;
+  setActiveTab: (tab: NavItem) => void;
   onLogout: () => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-const navItems: { name: NavItem; icon: React.FC<React.SVGProps<SVGSVGElement>> }[] = [
-  { name: 'Dashboard', icon: ChartPieIcon },
-  { name: 'Data Hub', icon: ArrowUpOnSquareIcon },
-  { name: 'Analytics', icon: LightBulbIcon },
-  { name: 'CRM', icon: UsersIcon },
-];
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, onLogout, isOpen, setIsOpen }) => {
+  const navItems: { name: NavItem; icon: React.FC<React.SVGProps<SVGSVGElement>> }[] = [
+    { name: 'Dashboard', icon: ChartPieIcon },
+    { name: 'Data Hub', icon: ArrowUpOnSquareIcon },
+    { name: 'Analytics', icon: LightBulbIcon },
+    { name: 'CRM', icon: UsersIcon },
+  ];
 
-const Sidebar: React.FC<SidebarProps> = ({ activeItem, setActiveItem, onLogout }) => {
   return (
     <div className="w-16 md:w-64 bg-white border-r border-slate-200 flex flex-col">
       <div className="flex items-center justify-center md:justify-start gap-3 h-20 border-b border-slate-200 px-4">
-        <SparklesIcon className="w-8 h-8 text-teal-600 flex-shrink-0" />
-        <h1 className="text-2xl font-bold text-slate-900 hidden md:block">BizAnalytica</h1>
+        <BIcon className="w-8 h-8 text-teal-600 flex-shrink-0" />
+        <h1 className="text-2xl font-bold text-slate-900 hidden md:block">Business</h1>
       </div>
       <nav className="flex-1 px-2 py-4 space-y-2">
         {navItems.map((item) => (
@@ -29,14 +30,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, setActiveItem, onLogout }
             key={item.name}
             href="#"
             onClick={(e) => {
-                e.preventDefault();
-                setActiveItem(item.name)
+              e.preventDefault();
+              setActiveTab(item.name)
             }}
-            className={`flex items-center p-3 rounded-lg transition-colors duration-200 ${
-              activeItem === item.name
-                ? 'bg-teal-600 text-white font-semibold'
-                : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
-            }`}
+            className={`flex items-center p-3 rounded-lg transition-colors duration-200 ${activeTab === item.name
+              ? 'bg-teal-600 text-white font-semibold'
+              : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
+              }`}
           >
             <item.icon className="w-6 h-6 flex-shrink-0" />
             <span className="ml-4 hidden md:block">{item.name}</span>
@@ -47,8 +47,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, setActiveItem, onLogout }
         <a
           href="#"
           onClick={(e) => {
-              e.preventDefault();
-              onLogout();
+            e.preventDefault();
+            onLogout();
           }}
           className="flex items-center p-3 rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900"
         >

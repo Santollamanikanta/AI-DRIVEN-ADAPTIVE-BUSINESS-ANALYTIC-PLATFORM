@@ -21,7 +21,7 @@ const MainApp: React.FC<MainAppProps> = ({ onLogout }) => {
     setUploadedData(data);
     setActiveView('Analytics'); // Switch to analytics view after upload
   };
-  
+
   const handleAnalysisComplete = (analysis: string, charts: any) => {
     setAnalysisResult(analysis);
     setChartData(charts);
@@ -34,12 +34,12 @@ const MainApp: React.FC<MainAppProps> = ({ onLogout }) => {
       case 'Data Hub':
         return <DataView onDataUploaded={handleDataUploaded} />;
       case 'Analytics':
-        return <AnalyticsView 
-                  salesData={uploadedData} 
-                  analysisResult={analysisResult} 
-                  chartData={chartData}
-                  onAnalysisComplete={handleAnalysisComplete}
-                />;
+        return <AnalyticsView
+          salesData={uploadedData}
+          analysisResult={analysisResult}
+          chartData={chartData}
+          onAnalysisComplete={handleAnalysisComplete}
+        />;
       case 'CRM':
         return <CrmView />;
       default:
@@ -49,7 +49,7 @@ const MainApp: React.FC<MainAppProps> = ({ onLogout }) => {
 
   return (
     <div className="flex h-screen bg-slate-50 text-slate-800">
-      <Sidebar activeItem={activeView} setActiveItem={setActiveView} onLogout={onLogout} />
+      <Sidebar activeTab={activeView} setActiveTab={setActiveView} onLogout={onLogout} />
       <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
         {renderView()}
       </main>

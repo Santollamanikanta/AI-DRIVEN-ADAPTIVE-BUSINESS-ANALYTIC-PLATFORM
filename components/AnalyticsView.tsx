@@ -4,7 +4,7 @@ import type { SalesRecord } from '../types';
 import { Card } from './ui/Card';
 import { Button } from './ui/Button';
 import { Loader } from './ui/Loader';
-import { analyzeDataWithGemini, getChartDataWithGemini } from '../services/geminiService';
+import { analyzeDataWithClaude, getChartDataWithClaude } from '../services/groqService';
 import Chart from './ui/Chart';
 
 interface AnalyticsViewProps {
@@ -20,20 +20,20 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ salesData, analysisResult
 
   const runAnalysis = async () => {
     if (salesData.length === 0) return;
-    
+
     setLoading(true);
     setError('');
     try {
       const jsonData = JSON.stringify(salesData);
       const [analysis, chartsResponse] = await Promise.all([
-        analyzeDataWithGemini(jsonData),
-        getChartDataWithGemini(jsonData)
+        analyzeDataWithClaude(jsonData),
+        getChartDataWithClaude(jsonData)
       ]);
       const parsedCharts = JSON.parse(chartsResponse);
       onAnalysisComplete(analysis, parsedCharts);
     } catch (e) {
       console.error("Analysis failed:", e);
-      setError("An error occurred while analyzing the data. The AI might be busy, please try again.");
+      setError(`Analysis failed: ${e instanceof Error ? e.message : String(e)}`);
     } finally {
       setLoading(false);
     }
@@ -72,31 +72,37 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ salesData, analysisResult
       )}
 
       {error && <p className="text-red-500 text-center p-4 bg-red-100 rounded-lg">{error}</p>}
-      
+
       {!loading && analysisResult && (
-         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            <Card className="lg:col-span-3">
-                 <h2 className="text-xl font-semibold mb-4 text-slate-800">AI Insights & Predictions</h2>
-                 <div 
-                    className="prose prose-sm max-w-none text-slate-600 prose-headings:text-slate-700" 
-                    dangerouslySetInnerHTML={{ __html: analysisResult.replace(/\n/g, '<br />').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} 
-                />
-            </Card>
-            <div className="lg:col-span-2 space-y-6">
-                {chartData?.barChart && (
-                    <Card>
-                        <h2 className="text-lg font-semibold mb-4">Sales Performance</h2>
-                        <Chart type="bar" data={chartData.barChart} />
-                    </Card>
-                )}
-                {chartData?.pieChart && (
-                    <Card>
-                        <h2 className="text-lg font-semibold mb-4">Category Breakdown</h2>
-                        <Chart type="pie" data={chartData.pieChart} />
-                    </Card>
-                )}
-            </div>
-         </div>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <Card className="lg:col-span-3">
+            <h2 className="text-xl font-semibold mb-4 text-slate-800">AI Insights & Predictions</h2>
+            <div
+              className="prose prose-sm max-w-none text-slate-600"
+              dangerouslySetInnerHTML={{
+                __html: analysisResult
+                  .replace(/^#+\s+(.*)$/gm, '<h3 class="font-bold text-slate-800 mt-4 mb-2">$1</h3>')
+                  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                  .replace(/^\s*[-*]\s+(.*)$/gm, '<li class="ml-4 list-disc">$1</li>')
+                  .replace(/\n/g, '<br />')
+              }}
+            />
+          </Card>
+          <div className="lg:col-span-2 space-y-6">
+            {chartData?.barChart && (
+              <Card>
+                <h2 className="text-lg font-semibold mb-4">Sales Performance</h2>
+                <Chart type="bar" data={chartData.barChart} />
+              </Card>
+            )}
+            {chartData?.pieChart && (
+              <Card>
+                <h2 className="text-lg font-semibold mb-4">Category Breakdown</h2>
+                <Chart type="pie" data={chartData.pieChart} />
+              </Card>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

@@ -20,10 +20,10 @@ export interface Customer {
 
 // Fix: Add global type definition for window.aistudio to be used for API key selection.
 declare global {
-    interface Window {
-        aistudio: {
-            hasSelectedApiKey: () => Promise<boolean>;
-            openSelectKey: () => Promise<void>;
-        }
+  interface Window {
+    aistudio: {
+      hasSelectedApiKey: () => Promise<boolean>;
+      openSelectKey: () => Promise<void>;
     }
+  }
 }
