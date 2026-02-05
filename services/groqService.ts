@@ -96,7 +96,7 @@ const callGroqMessages = async (messages: any[], model: string, isJson: boolean 
     try {
         const apiKey = import.meta.env.VITE_GROQ_API_KEY;
         if (!apiKey) {
-            throw new Error("Missing Groq API Key! Please check .env.local");
+            throw new Error("Missing Groq API Key! If you are on Vercel/Production, add VITE_GROQ_API_KEY to your Environment Variables in the dashboard.");
         }
 
         console.log("🚀 Groq API Call Starting...");
