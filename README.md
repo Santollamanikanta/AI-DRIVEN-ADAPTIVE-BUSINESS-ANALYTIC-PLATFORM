@@ -50,6 +50,3 @@ A professional, AI-powered business analytics and CRM platform designed for adap
 - **AI Engine**: Groq (Llama 3/Mistral)
 - **Email Gateway**: EmailJS
 - **Build Tool**: Vite
-
----
-Created by **Santolla Manikanta**
