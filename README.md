@@ -1,20 +1,53 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# AI-Driven Adaptive Business Analytic Platform 🚀
 
-# Run and deploy your AI Studio app
+A professional, AI-powered business analytics and CRM platform designed for adaptive sales outreach and client management.
 
-This contains everything you need to run your app locally.
+## 🌟 Key Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1jMunXrXcrj1Uxg-jIVINrPEmMJOmahRk
+### 🤖 AI-Powered CRM
+- **Dynamic Lead Management**: Effortlessly track and manage your business prospects.
+- **AI Personalization**: Automatically generate tailored outreach messages using advanced AI (Groq API).
+- **One-Click Communication**: Seamlessly bridge the gap between analytics and outreach.
 
-## Run Locally
+### 📧 Professional Email Automation
+- **Direct Dispatch**: Integrated with EmailJS for real-world automated email delivery.
+- **Smart Templates**: Use AI to draft personalized emails that land in the customer's Primary inbox.
+- **No-Domain Required**: Professionally configured to work immediately without complex domain setups.
 
-**Prerequisites:**  Node.js
+### 📊 Adaptive Analytics
+- **Live Data Visualization**: Interactive charts and metrics to track your business growth.
+- **Responsive Design**: A sleek, modern dashboard built with React and Tailwind CSS.
+- **High-Performance Infrastructure**: Powered by Vite for lightning-fast load times.
 
+## 🚀 Getting Started
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Prerequisites
+- Node.js (v18+)
+
+### Setup Instructions
+1. **Clone the project**
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Configure Environment Variables**:
+   Create a `.env.local` file and add your API keys:
+   ```env
+   VITE_GROQ_API_KEY=your_groq_key
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
+   ```
+4. **Run the application**:
+   ```bash
+   npm run dev
+   ```
+
+## 🛠️ Tech Stack
+- **Frontend**: React, Tailwind CSS, Recharts
+- **AI Engine**: Groq (Llama 3/Mistral)
+- **Email Gateway**: EmailJS
+- **Build Tool**: Vite
+
+---
+Created by **Santolla Manikanta**
