@@ -1,5 +1,7 @@
 # AI-Driven Adaptive Business Analytic Platform 🚀
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=vercel)](https://ai-driven-adaptive-business-analyti.vercel.app/)
+
 A professional, AI-powered business analytics and CRM platform designed for adaptive sales outreach and client management.
 
 ## 🌟 Key Features
