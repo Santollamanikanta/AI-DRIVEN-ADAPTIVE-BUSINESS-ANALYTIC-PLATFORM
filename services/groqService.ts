@@ -105,9 +105,9 @@ const callGroqMessages = async (messages: any[], model: string, isJson: boolean 
         console.log("API Key prefix:", apiKey.substring(0, 10));
 
         // Using Llama 3.2 90B Vision Preview for better accuracy
-        const modelToUse = model === "llama-3.2-11b-vision-preview" ? "llama-3.2-90b-vision-preview" : model;
+        const modelToUse = model;
 
-        const response = await fetch('/groq-api/chat/completions', {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ const callGroqMessages = async (messages: any[], model: string, isJson: boolean 
             body: JSON.stringify({
                 model: modelToUse,
                 messages: messages,
-                max_tokens: 2048,
+                max_tokens: 1024,
                 temperature: 0.2,
                 ...(isJson ? { response_format: { type: "json_object" } } : {})
             })
