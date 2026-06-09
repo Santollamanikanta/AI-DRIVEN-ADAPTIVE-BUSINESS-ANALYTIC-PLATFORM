@@ -77,7 +77,7 @@ const CrmView: React.FC = () => {
       if (response.success) {
         setSendSuccess(response.message);
         // Clear the draft after successful auto-send
-        setTimeout(() => setGeneratedEmail(''), 3000);
+        setTimeout(() => setGeneratedEmail(''), 500);
       } else {
         setErrorEmail(response.message);
         if (response.message.includes('VITE_EMAILJS') || response.message.includes('not configured')) {

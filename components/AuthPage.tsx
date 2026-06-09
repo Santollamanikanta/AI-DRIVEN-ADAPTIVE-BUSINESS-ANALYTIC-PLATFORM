@@ -20,22 +20,20 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
     setLoading(true);
 
     // Mock authentication
-    setTimeout(() => {
-      setLoading(false);
-      if (isLogin) {
-        if (email && password) {
-          onLogin(email.split('@')[0]);
-        } else {
-          setError('Please fill in all fields');
-        }
+    setLoading(false);
+    if (isLogin) {
+      if (email && password) {
+        onLogin(email.split('@')[0]);
       } else {
-        if (email && password && name) {
-          onLogin(name);
-        } else {
-          setError('Please fill in all fields');
-        }
+        setError('Please fill in all fields');
       }
-    }, 1000);
+    } else {
+      if (email && password && name) {
+        onLogin(name);
+      } else {
+        setError('Please fill in all fields');
+      }
+    }
   };
 
   const toggleForm = () => {
